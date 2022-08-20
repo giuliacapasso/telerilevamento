@@ -48,30 +48,18 @@ im3 <- ggplot() + geom_raster(sd_sim_PC1, mapping =aes(x=x, y=y, fill=layer)) + 
 
 im1 + g1 + im3 
 
+# Calculate heterogenity in a 5x5 window ((focal(img, matrix(), fun=sd)
 
+sd5 <- focal(pc1sim, matrix(1/25, 5, 5), fun=sd)
 
-p224r63_2011 <- brick("p224r63_2011_masked.grd")
+# Map by ggplot the standard deviation of the first proncipal component
 
-plot(p224r63_2011)
+im4 <- ggplot() + geom_raster(sd5, mapping = aes(x=x, y=y, fill=layer)) + scale_fill_viridis(option = "inferno")
 
-p224r63_2011
+im3 + im4
 
-plot(p224r63_2011$B1_sre, p224r63_2011$B2_sre, col="red", pch=19, cex=2)
-plot(p224r63_2011$B2_sre, p224r63_2011$B1_sre, col="red", pch=19, cex=2)
+sd7 <- focal(pc1sim, matrix(1/49, 7, 7), fun=sd)
 
-pairs(p224r63_2011)
+im7 <- ggplot() + geom_raster(sd7, mapping = aes(x=x, y=y, fill=layer)) + scale_fill_viridis(option = "inferno")
 
-# aggregate cells: resampling (ricampionamento)
-p224r63_2011res <- aggregate(p224r63_2011, fact=10)
-
-par(mfrow=c(2,1))
-plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="lin")
-plotRGB(p224r63_2011res, r=4, g=3, b=2, stretch="lin")
-
-p224r63_2011res_pca <- rasterPCA(p224r63_2011res)
-
-summary(p224r63_2011res_pca$model)
-
-# dev.off()
-plotRGB(p224r63_2011res_pca$map, r=1, g=2, b=3, stretch="lin")
-
+im3 + im4 + im7
