@@ -4,6 +4,7 @@ library(raster)
 library(RStoolbox)
 library(ggplot2)
 library(patchwork)
+library(viridis)
 
 setwd("~/Desktop/lab_/")
 
@@ -28,7 +29,24 @@ pc3sim <- simPCA$map$PC3
 ggplot() + geom_raster(pc1sim, mapping = aes(x=x, y=y, fill=PC1))
 
 
-# now calculation of the variability on one of the components or on the one that has the maximum variability with the focal function
+# calculation of the variability on one of the components that shows the maximum variability with the ##focal function
+# Standard deviation of PC1
+sd_sim_PC1 <- focal(pc1sim, matrix(1/9, 3, 3), fun=sd)
+
+# Map by ggplot the standard deviation of the first proncipal component
+
+ggplot() + 
+geom_raster(sd_sim_PC1, mapping =aes(x=x, y=y, fill=layer)) + 
+scale_fill_viridis(option = "cividis") + 
+ggtitle("Standard deviation of the first PC")
+
+# images altogether 
+ 
+im1 <- ggRGB(similaun, 3, 2, 1)
+g1 <- ggplot() + geom_raster(pc1sim, mapping = aes(x=x, y=y, fill=PC1))
+im3 <- ggplot() + geom_raster(sd_sim_PC1, mapping =aes(x=x, y=y, fill=layer)) + scale_fill_viridis(option = "inferno")
+
+im1 + g1 + im3 
 
 
 
