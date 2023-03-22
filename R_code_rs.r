@@ -1,9 +1,10 @@
 # Questo è il primo script che useremo a lezione
 
-library(raster)
+# install.packages("raster")
+ 
 
 # Settaggio cartella di lavoro
-> setwd("~/Desktop/lab_")
+setwd("~/Desktop/lab")
 
 # import
 l2011 <- brick("p224r63_2011.grd")
@@ -35,7 +36,7 @@ plot(l2011$B1_sre, col=cl)
 clb <- colorRampPalette(c("dark blue", "blue", "light blue")) (100)
 plot(l2011$B1_sre, col=clb) 
 
-# export pdf image to lab_ folder
+# export pdf image to lab folder
 pdf("banda1.pdf")
 plot(l2011$B1_sre, col=clb) 
 
