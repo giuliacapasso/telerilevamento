@@ -7,7 +7,7 @@
 library(raster)
 # library(rasterVis) 
 
-setwd("~/Desktop/lab_/greenland_data")
+setwd("~/Desktop/lab/greenland_data")
 
 lst_2000 <- raster("lst_2000.tif")
 lst_2005 <- raster("lst_2005.tif")
@@ -52,7 +52,7 @@ plot(TGr, col=cl)
 
 library(raster)
 
-setwd("~/Desktop/lab_/en")
+setwd("~/Desktop/lab/en")
 
 en01 <- raster("EN_0001.png") 
 
